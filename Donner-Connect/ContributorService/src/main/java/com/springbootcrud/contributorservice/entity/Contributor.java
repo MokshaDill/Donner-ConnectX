@@ -1,11 +1,10 @@
 package com.springbootcrud.contributorservice.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+
+import jakarta.persistence.*;
 
 @Entity
+@Table
 public class Contributor {
 
     @Id
@@ -14,10 +13,27 @@ public class Contributor {
 
     private String name;
     private String email;
-    private String phoneNumber;
+    private String nic;
     private String address;
+    private String city;
+    private String phoneNumber;
+    private String password;
 
-    // Getters and Setters
+    public Contributor() {
+
+    }
+
+    public Contributor(String name, String email, String nic, String address, String city, String phoneNumber, String password) {
+        super();
+        this.name = name;
+        this.email = email;
+        this.nic = nic;
+        this.address = address;
+        this.city = city;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }
@@ -42,6 +58,30 @@ public class Contributor {
         this.email = email;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getNic() {
+        return nic;
+    }
+
+    public void setNic(String nic) {
+        this.nic = nic;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -50,11 +90,25 @@ public class Contributor {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getAddress() {
-        return address;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "Contributor{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", nic='" + nic + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

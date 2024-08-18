@@ -9,37 +9,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/contributors")
+@RequestMapping("/contributor")
 public class ContributorController {
 
     @Autowired
     private ContributorService contributorService;
 
-    @PostMapping("/register")
+    @PostMapping
     public ResponseEntity<Contributor> registerContributor(@RequestBody Contributor contributor) {
-        Contributor savedContributor = contributorService.registerContributor(contributor);
-        return ResponseEntity.ok(savedContributor);
+        return ResponseEntity.ok(contributorService.registerContributor(contributor));
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<Contributor> updateContributor(@RequestBody Contributor contributor) {
-        Contributor updatedContributor = contributorService.updateContributor(contributor);
-        return ResponseEntity.ok(updatedContributor);
-    }
-
-    @GetMapping
-    public ResponseEntity<List<Contributor>> getAllContributors() {
-        List<Contributor> contributors = contributorService.getAllContributors();
-        return ResponseEntity.ok(contributors);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Contributor> getContributorById(@PathVariable Long id) {
-        Contributor contributor = contributorService.getContributorById(id);
-        if (contributor == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(contributor);
+    @PutMapping("/{id}")
+    public ResponseEntity<Contributor> updateContributor(@PathVariable Long id, @RequestBody Contributor contributor) {
+        Contributor updatedContributor = contributorService.updateContributor(id, contributor);
+        return updatedContributor != null ? ResponseEntity.ok(updatedContributor) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
@@ -47,5 +31,16 @@ public class ContributorController {
         contributorService.deleteContributor(id);
         return ResponseEntity.noContent().build();
     }
-}
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Contributor> getContributor(@PathVariable Long id) {
+        Contributor contributor = contributorService.getContributor(id);
+        return contributor != null ? ResponseEntity.ok(contributor) : ResponseEntity.notFound().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Contributor>> getAllContributors() {
+        return ResponseEntity.ok(contributorService.getAllContributors());
+    }
+
+}
