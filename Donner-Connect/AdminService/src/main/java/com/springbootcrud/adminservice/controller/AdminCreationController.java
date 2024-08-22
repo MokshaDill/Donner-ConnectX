@@ -1,7 +1,6 @@
 package com.springbootcrud.adminservice.controller;
 
-
-import com.springbootcrud.adminservice.DTO.AdminDTO;
+import com.springbootcrud.adminservice.entity.Admin;
 import com.springbootcrud.adminservice.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +14,7 @@ public class AdminCreationController {
     private AdminService adminService;
 
     @PostMapping("/regadmin")
-    public AdminDTO createAdmin(@RequestBody AdminDTO adminDTO) {
-        return adminService.addAdmin(adminDTO);
+    public Admin createAdmin(@RequestBody Admin admin) {
+        return adminService.addAdmin(admin);
     }
 }
