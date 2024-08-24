@@ -1,0 +1,35 @@
+.cn_form{
+    background-color: #ffffff;
+    padding: 20px;
+    max-width: 500px; 
+    border-radius: 15px; 
+    
+}
+
+/*  the form fields */
+.cn_form input,
+.cn_form textarea {
+    width: 100%;
+    padding: 6px;
+    margin-bottom: 6px;
+    font-size: 13px;
+    border-radius: 10px;
+    border: 1px solid #d1cfcf;
+}
+.cn_form input:focus, .cn_form textarea:focus {
+border: 1px solid #d1cfcf; /* Change this color for the focus effect */
+}
+.cn_form button {
+background-color: #d73e06; /* Change this color to your desired color */
+color: #fff; /* Text color for the button */
+border: none;
+border-radius: 10px;
+padding: 10px 30px;
+cursor: pointer;
+text-align: center;
+}
+
+/* Additional styles for button on hover (optional) */
+.cn_form button:hover {
+background-color: #fd662f; /* Change this color to your desired color */ /* Change this color for the hover effect */
+}
