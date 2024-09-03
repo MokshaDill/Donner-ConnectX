@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
     <script defer src="main.js"></script>
@@ -14,62 +13,43 @@
         <!-- Vertical Navbar -->
         <nav class="navbar navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 navbar-light bg-white border-end-lg" id="navbarVertical">
             <div class="container-fluid">
-                <!-- Toggler -->
                 <button class="navbar-toggler ms-n2" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse" aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <!-- Brand -->
                 <a class="py-lg-2 mb-lg-5 px-lg-6 me-0" href="#">
                     <img src="https://cdn-icons-png.flaticon.com/512/4919/4919646.png" alt="Brand Logo">
                 </a>
-                <!-- Collapse -->
                 <div class="collapse navbar-collapse" id="sidebarCollapse">
-                    <!-- Navigation -->
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="#" id="dashboard-link">
-                                <i class="bi bi-house"></i> Dashboard
-                            </a>
+                            <a class="nav-link" href="#" id="dashboard-link"><i class="bi bi-house"></i> Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" id="camps-link">
-                                <i class="bi bi-calendar"></i> Camps
-                            </a>
+                            <a class="nav-link" href="#" id="camps-link"><i class="bi bi-calendar"></i> Camps</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" id="create-admin-link">
-                                <i class="bi bi-person-plus"></i> Admin Configurations
-                            </a>
+                            <a class="nav-link" href="#" id="create-admin-link"><i class="bi bi-person-plus"></i> Admin Configurations</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" id="user-crud-link">
-                                <i class="bi bi-person-lines-fill"></i> Users
-                            </a>
+                            <a class="nav-link" href="#" id="user-crud-link"><i class="bi bi-person-lines-fill"></i> Users</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" id="send-notification-link">
-                                <i class="bi bi-bell"></i> Send Notification
-                            </a>
+                            <a class="nav-link" href="#" id="send-notification-link"><i class="bi bi-bell"></i> Send Notification</a>
                         </li>
                     </ul>
-                    <!-- Divider -->
                     <hr class="navbar-divider my-5 opacity-20">
-                    <!-- User and Logout -->
                     <ul class="navbar-nav mt-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="bi bi-person-circle"></i> Account
-                            </a>
+                            <a class="nav-link" href="#"><i class="bi bi-person-circle"></i> Account</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" id="logout-link">
-                                <i class="bi bi-box-arrow-left"></i> Logout
-                            </a>
+                            <a class="nav-link" href="#" id="logout-link"><i class="bi bi-box-arrow-left"></i> Logout</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
+
         <!-- Main content -->
         <div class="h-screen flex-grow-1 overflow-y-lg-auto p-4" id="main-content">
             <h1 class="h2 mb-4">Welcome to the Admin Dashboard</h1>
@@ -77,7 +57,6 @@
         </div>
     </div>
 
-    <!-- Bootstrap JavaScript Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
