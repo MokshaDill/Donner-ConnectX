@@ -1,10 +1,10 @@
-package com.springbootcrud.analysisservice;
+package com.springbootcrud.feedbackservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AnalysisServiceApplicationTests {
+class FeedbackServiceApplicationTests {
 
     @Test
     void contextLoads() {
