@@ -58,4 +58,8 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @GetMapping("/{userId}/donations")
+    public List<String> getDonationHistory(@PathVariable Long userId) {
+        return userService.getDonationHistory(userId);
+    }
 }

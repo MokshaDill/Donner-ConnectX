@@ -9,6 +9,7 @@ public interface UserService {
     User updateUser(Long id, User user);
     User getUserById(Long id);
     void deleteUser(Long id);
+    List<String> getDonationHistory(Long userId);
 
     List<User> getAllUsers();
 
