@@ -26,4 +26,55 @@ public class UserServiceImpl implements UserService {
     public User registerUser(User user) {
         return userRepository.save(user);
     }
+
+    /**
+     * Updates the profile of an existing user.
+     *
+     * @param user The user with updated information
+     * @return The updated user
+     */
+
+    @Override
+    public User updateUser(Long id, User user) {
+        Optional<User> existingUser = userRepository.findById(user.getId());
+        if (existingUser.isPresent()) {
+            User updatedUser = existingUser.get();
+            updatedUser.setName(user.getName());
+            updatedUser.setEmail(user.getEmail());
+            updatedUser.setPhoneNumber(user.getPhoneNumber());
+            updatedUser.setDonations(user.getDonations());
+            return userRepository.save(updatedUser);
+        } else {
+            throw new IllegalArgumentException("User not found");
+        }
+    }
+
+    /**
+     * Retrieves a user's profile.
+     *
+     * @param userId The ID of the user
+     * @return The user profile
+     */
+    @Override
+    public User getUserById(Long userId) {
+        return userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found"));
+    }
+
+    /**
+     * Deletes a user's profile.
+     *
+     * @param userId The ID of the user
+     */
+    public void deleteUser(Long userId) {
+        userRepository.deleteById(userId);
+    }
+
+    /**
+     * Retrieves all users.
+     *
+     * @return A list of all users
+     */
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
 }
