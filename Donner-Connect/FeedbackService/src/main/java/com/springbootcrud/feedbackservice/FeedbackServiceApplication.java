@@ -1,13 +1,13 @@
-package com.springbootcrud.analysisservice;
+package com.springbootcrud.feedbackservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AnalysisServiceApplication {
+public class FeedbackServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AnalysisServiceApplication.class, args);
+        SpringApplication.run(FeedbackServiceApplication.class, args);
     }
 
 }
