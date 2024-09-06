@@ -23,8 +23,6 @@ public class FeedbackController {
         return "feedback-list";
     }
 
-    
-
     @GetMapping("/new")
     public String showFeedbackForm(Model model) {
         Feedback feedback = new Feedback();
