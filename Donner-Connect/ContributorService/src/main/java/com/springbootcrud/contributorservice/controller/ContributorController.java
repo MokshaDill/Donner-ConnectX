@@ -39,7 +39,7 @@ public class ContributorController {
         return contributor != null ? ResponseEntity.ok(contributor) : ResponseEntity.notFound().build();
     }
 
-    @GetMapping
+    @GetMapping("/contributors")
     public ResponseEntity<List<Contributor>> getAllContributors() {
         return ResponseEntity.ok(contributorService.getAllContributors());
     }

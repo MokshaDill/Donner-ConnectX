@@ -47,8 +47,9 @@ public class ContributorServiceImpl implements ContributorService {
 
     @Override
     public List<Contributor> getAllContributors() {
-        return List.of();
+        return contributorRepository.findAll();
     }
+
 
 
 }
