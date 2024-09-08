@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/contributor")
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 public class ContributorController {
 
     @Autowired

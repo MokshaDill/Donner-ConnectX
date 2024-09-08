@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="css/bootstrap.min.css" rel="stylesheet"/>
         <link href="css/footer.css" rel="stylesheet"/>                          <!--CSS link-->
-        <link href="css/camp.css" rel="stylesheet"/>    
+        <link href="css/contributor.css" rel="stylesheet"/> 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">             <!--Google fonts link-->
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -73,75 +73,68 @@
                 </div>
               </nav>  <!--navbar end-->
             
-
+              <br><br><br><br><br><br><br><br><br>
 
              <div class="body">
                 <body>
+
                     <div class="container">
                         <header>
-                            <h1>Camp Management</h1>
-                            <button class="add-camp-btn" id="addCampBtn">Add New Camp</button>
+                            <h1>Contributors</h1>
+                            <button class="add-contributor-btn" id="addContributorBtn">Register New Contributor</button>
                         </header>
                 
-                        <table class="camps-table">
+                        <table>
                             <thead>
                                 <tr>
-                                    <th>Camp Name</th>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                    <th>Location</th>
-                                    <th>Actions</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>NIC</th>
+                                    <th>Address</th>
+                                    <th>City</th>
+                                    <th>Phone Number</th>
+                                    <th>Password</th>
                                 </tr>
                             </thead>
-                            <tbody id="campsTable">
+                            <tbody id="contributorsTable">
                                 <tr>
-                                    <td>Blood Drive 1</td>
-                                    <td>2024-09-15</td>
-                                    <td>10:00 AM</td>
+                                    <td>John Doe</td>
+                                    <td>john.doe@example.com</td>
+                                    <td>123456789</td>
+                                    <td>123 Main St</td>
                                     <td>New York</td>
-                                    <td>
-                                        <button class="edit-btn">Edit</button>
-                                        <button class="delete-btn">Delete</button>
-                                    </td>
+                                    <td>+123456789</td>
+                                    <td>********</td>
                                 </tr>
+                                <!-- Additional contributors can go here -->
                             </tbody>
                         </table>
                     </div>
                 
-                    <!-- Modal for adding a new camp -->
                     <div id="modal" class="modal">
                         <div class="modal-content">
                             <span class="close">&times;</span>
-                            <h2>Add New Camp</h2>
-                            <form id="campForm">
-                                <input type="text" id="campName" placeholder="Camp Name" required>
-                                <input type="date" id="campDate" required>
-                                <input type="time" id="campTime" required>
-                            
-                                <label for="campLocation">Select or Type Location:</label>
-                                <!-- Input field for typing location -->
-                                <input type="text" id="campLocationInput" placeholder="Enter Location" required>
-                                
-                                <label for="campLocation">Or select location from map:</label>
-                                <div id="map" style="height: 200px;"></div>
-                            
-                                <!-- Hidden field for storing map-based location -->
-                                <input type="hidden" id="campLocation" required>
-                            
-                                <button type="submit" class="submit-btn">Add Camp</button>
+                            <h2>Register</h2>
+                            <form id="contributorForm">
+                                <input type="text" id="name" placeholder="Name" required>
+                                <input type="email" id="email" placeholder="Email" required>
+                                <input type="text" id="nic" placeholder="NIC" required>
+                                <input type="text" id="address" placeholder="Address" required>
+                                <input type="text" id="city" placeholder="City" required>
+                                <input type="tel" id="phone" placeholder="Phone Number" required>
+                                <input type="password" id="password" placeholder="Password" required>
+                                <button type="submit" class="submit-btn">Add Contributor</button>
                             </form>
                         </div>
                     </div>
-                   
                 
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
-                    <script src="js/camp.js"></script>
+                    <script src="js/contributor.js"></script>
+                
 
              </div>
-             <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 
-             
+             <br><br><br><br><br><br><br><br><br><br>
           
               <!--footer-->
              
