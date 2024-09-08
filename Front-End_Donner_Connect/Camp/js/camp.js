@@ -50,12 +50,40 @@ campForm.onsubmit = function(event) {
     const campLocation = campLocationInput.value; // Use the manually entered location
 
     if (campName && campDate && campTime && campLocation) {
-        // Add camp to the table
-        addCampToTable(campName, campDate, campTime, campLocation);
-
-        // Clear the form
-        campForm.reset();
-        modal.style.display = "none";
+        // Send POST request to the backend
+        fetch('http://localhost:8084/camp', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                name: campName,
+                location: campLocation,
+                date: campDate,
+                time: campTime,
+                approved: false, // Default value
+                contributorId: null // Replace with actual contributor ID if available
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Check if the response is successful
+            if (data) {
+                // Add camp to the table
+                addCampToTable(campName, campDate, campTime, campLocation);
+                
+                // Clear the form
+                campForm.reset();
+                modal.style.display = "none";
+            } else {
+                alert("Failed to add camp.");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("An error occurred. Please try again.");
+        });
     } else {
         alert("Please fill in all fields.");
     }
