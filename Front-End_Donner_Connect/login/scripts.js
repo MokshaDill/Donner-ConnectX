@@ -22,27 +22,37 @@ function openRole(evt, roleName) {
     }
 }
 
-// document.getElementById("User").style.display = "block"; // Default tab open
+document.getElementById("User").style.display = "block"; // Default tab open
 
 function handleLogin(event, role) {
     event.preventDefault();
-    const form = event.target;
-    const uname = form.querySelector('input[type="username"]').value;
-    const password = form.querySelector('input[type="password"]').value;
+    //const form = event.target;
 
-    fetch('http://localhost:8083/login', { 
+    var uname = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+
+    var requestBody = {
+        email: uname,
+        password: password,
+        role: role
+    };
+
+    // const uname = form.querySelector('input[type="username"]').value;
+    // const password = form.querySelector('input[type="password"]').value;
+
+    var url = 'http://localhost:8083/login';
+
+    fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-            "username": uname,
-            "password": password,
-        }),
+        body: JSON.stringify(requestBody)
     })
     .then(response => response.json())
     .then(data => {
         alert('Login successful'); 
+        window.location.href = "register.html";
         console.log(data); 
     })
     .catch(error => console.error('Error:', error));
