@@ -6,6 +6,28 @@ const campForm = document.getElementById("campForm");
 const campsTable = document.getElementById("campsTable");
 const campLocationInput = document.getElementById('campLocationInput'); // Input field for typing location
 
+// Fetch and display existing camps when the page loads
+window.onload = function() {
+    fetch('http://localhost:8084/camp/camps', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Loop through the data and add each camp to the table
+        data.forEach(camp => {
+            addCampToTable(camp.name, camp.date, camp.time, camp.location);
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching camps:', error);
+        alert("An error occurred while fetching the camps.");
+    });
+};
+
 // When the user clicks the "Add New Camp" button, open the modal
 addCampBtn.onclick = function() {
     modal.style.display = "block";
