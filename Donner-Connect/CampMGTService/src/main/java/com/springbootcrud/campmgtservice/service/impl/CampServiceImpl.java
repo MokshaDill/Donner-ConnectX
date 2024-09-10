@@ -67,4 +67,9 @@ public class CampServiceImpl implements CampService {
     public List<Camp> getAllPendingApprovalCamps() {
         return campRepository.findByApprovedFalse();
     }
+
+    @Override
+    public List<Camp> getAllCamps() {
+        return campRepository.findAll();
+    }
 }
