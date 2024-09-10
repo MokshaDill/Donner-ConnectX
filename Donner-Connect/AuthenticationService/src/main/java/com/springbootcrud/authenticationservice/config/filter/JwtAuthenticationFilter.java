@@ -1,6 +1,6 @@
-package com.springbootcrud.authenticationservice.filter;
+package com.springbootcrud.authenticationservice.config.filter;
 
-import com.springbootcrud.authenticationservice.services.impl.JwtService;
+import com.springbootcrud.authenticationservice.services.JwtService;
 import com.springbootcrud.authenticationservice.services.impl.UserDetailsServiceImp;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
