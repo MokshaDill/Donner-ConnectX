@@ -9,6 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.spring-boot-crud</groupId>
+    <artifactId>AnalysisService</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>AnalysisService</name>
+    <description>AnalysisService</description>
     <artifactId>FeedbackService</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>FeedbackService</name>
