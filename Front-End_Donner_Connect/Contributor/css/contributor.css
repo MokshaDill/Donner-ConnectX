@@ -30,6 +30,19 @@ h1 {
     border-radius: 5px;
 }
 
+.edit-contributor-btn {
+    background-color: #ff4757;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.edit-contributor-btn:hover {
+    background-color: #ff4757;
+}
+
 .add-contributor-btn:hover {
     background-color: #ff4757;
 }
