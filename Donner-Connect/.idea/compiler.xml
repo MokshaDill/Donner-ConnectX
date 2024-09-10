@@ -11,11 +11,13 @@
         <module name="UserService" />
         <module name="ContributorService" />
         <module name="NotificationService" />
-        <module name="AnalysisService" />
         <module name="AuthenticationService" />
         <module name="CampMGTService" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="AnalysisService" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

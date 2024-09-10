@@ -4,9 +4,479 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
     <script defer src="main.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const date = now.toLocaleDateString(); // Current date
+            document.getElementById('current-time').textContent = `Current Time: ${hours}:${minutes}:${seconds}`;
+            document.getElementById('current-date').textContent = `Date: ${date}`;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setInterval(updateTime, 1000);
+        });
+
+        function showError(message) {
+            document.getElementById('main-content').innerHTML = `
+                <div class="alert alert-error">
+                    <i class="bi bi-exclamation-triangle alert-icon"></i>
+                    ${message}
+                </div>`;
+        }
+
+        function loadPage(page) {
+            switch (page) {
+                case 'dashboard':
+                    fetch('http://localhost:8081/dashboard')
+                        .then(response => response.json())
+                        .then(data => {
+                            document.getElementById('main-content').innerHTML = `
+                                <h1>Dashboard</h1>
+                                <p>Welcome to the Admin Dashboard. Current stats:</p>
+                                <!-- Add your dashboard content here -->
+                            `;
+                        })
+                        .catch(error => showError('Failed to load dashboard.'));
+                    break;
+                case 'camps':
+                    fetch('http://localhost:8081/donationcamp/all')
+                        .then(response => response.json())
+                        .then(data => {
+                            const rows = data.map(camp => `
+                                <tr>
+                                    <td>${camp.id}</td>
+                                    <td>${camp.name}</td>
+                                    <td>${camp.description}</td>
+                                    <td>${camp.date}</td>
+                                    <td>${camp.time}</td>
+                                    <td>${camp.location}</td>
+                                    <td><button class="btn btn-primary btn-sm" onclick="editCamp(${camp.id})">Edit</button></td>
+                                    <td><button class="btn btn-danger btn-sm" onclick="deleteCamp(${camp.id})">Delete</button></td>
+                                </tr>
+                            `).join('');
+                            document.getElementById('main-content').innerHTML = `
+                                <h2>Camps</h2>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th>Location</th>
+                                            <th colspan="2">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>${rows}</tbody>
+                                </table>
+                                <form id="camp-crud-form" class="mt-4">
+                                    <div class="mb-3">
+                                        <label for="camp-id" class="form-label">Camp ID</label>
+                                        <input type="text" id="camp-id" class="form-control" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="camp-name" class="form-label">Name</label>
+                                        <input type="text" id="camp-name" class="form-control" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="camp-description" class="form-label">Description</label>
+                                        <textarea id="camp-description" class="form-control" rows="4" required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="camp-date" class="form-label">Date</label>
+                                        <input type="date" id="camp-date" class="form-control" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="camp-time" class="form-label">Time</label>
+                                        <input type="time" id="camp-time" class="form-control" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="camp-location" class="form-label">Location</label>
+                                        <input type="text" id="camp-location" class="form-control" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Create Camp</button>
+                                </form>
+                            `;
+                            document.getElementById('camp-crud-form').addEventListener('submit', function(e) {
+                                e.preventDefault();
+                                const id = document.getElementById('camp-id').value;
+                                const name = document.getElementById('camp-name').value;
+                                const description = document.getElementById('camp-description').value;
+                                const date = document.getElementById('camp-date').value;
+                                const time = document.getElementById('camp-time').value;
+                                const location = document.getElementById('camp-location').value;
+                                fetch('http://localhost:8081/donationcamp/create', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ id, name, description, date, time, location })
+                                })
+                                .then(response => response.json())
+                                .then(result => {
+                                    alert('Camp created successfully');
+                                    loadPage('camps');
+                                })
+                                .catch(error => showError('Failed to create camp.'));
+                            });
+                            window.editCamp = function(id) {
+                                fetch(`http://localhost:8081/donationcamp/${id}`)
+                                    .then(response => response.json())
+                                    .then(camp => {
+                                        document.getElementById('main-content').innerHTML = `
+                                            <h2>Edit Camp</h2>
+                                            <form id="edit-camp-form" class="row g-3">
+                                                <div class="col-md-3">
+                                                    <label for="edit-camp-id" class="form-label">Camp ID</label>
+                                                    <input type="text" id="edit-camp-id" class="form-control" value="${camp.id}" readonly>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="edit-camp-name" class="form-label">Name</label>
+                                                    <input type="text" id="edit-camp-name" class="form-control" value="${camp.name}" required>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="edit-camp-description" class="form-label">Description</label>
+                                                    <textarea id="edit-camp-description" class="form-control" rows="4" required>${camp.description}</textarea>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="edit-camp-date" class="form-label">Date</label>
+                                                    <input type="date" id="edit-camp-date" class="form-control" value="${camp.date}" required>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="edit-camp-time" class="form-label">Time</label>
+                                                    <input type="time" id="edit-camp-time" class="form-control" value="${camp.time}" required>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="edit-camp-location" class="form-label">Location</label>
+                                                    <input type="text" id="edit-camp-location" class="form-control" value="${camp.location}" required>
+                                                </div>
+                                                <div class="col-12">
+                                                    <button type="submit" class="btn btn-primary">Update Camp</button>
+                                                </div>
+                                            </form>
+                                        `;
+                                        document.getElementById('edit-camp-form').addEventListener('submit', function(e) {
+                                            e.preventDefault();
+                                            const name = document.getElementById('edit-camp-name').value;
+                                            const description = document.getElementById('edit-camp-description').value;
+                                            const date = document.getElementById('edit-camp-date').value;
+                                            const time = document.getElementById('edit-camp-time').value;
+                                            const location = document.getElementById('edit-camp-location').value;
+                                            fetch(`http://localhost:8081/donationcamp/update/${id}`, {
+                                                method: 'PUT',
+                                                headers: { 'Content-Type': 'application/json' },
+                                                body: JSON.stringify({ name, description, date, time, location })
+                                            })
+                                            .then(response => response.json())
+                                            .then(result => {
+                                                alert('Camp updated successfully');
+                                                loadPage('camps');
+                                            })
+                                            .catch(error => showError('Failed to update camp.'));
+                                        });
+                                    })
+                                    .catch(error => showError('Failed to load camp.'));
+                            };
+                            window.deleteCamp = function(id) {
+                                fetch(`http://localhost:8081/donationcamp/delete/${id}`, { method: 'DELETE' })
+                                    .then(response => {
+                                        if (response.ok) alert('Camp deleted successfully');
+                                        else throw new Error('Failed to delete camp');
+                                    })
+                                    .catch(error => showError('Failed to delete camp.'));
+                            };
+                        })
+                        .catch(error => showError('Failed to load camps.'));
+                    break;
+                case 'admin-config':
+                    fetch('http://localhost:8081/admin/all')
+                        .then(response => response.json())
+                        .then(data => {
+                            const rows = data.map(admin => `
+                                <tr>
+                                    <td>${admin.id}</td>
+                                    <td>${admin.email}</td>
+                                    <td>${admin.name}</td>
+                                    <td>${admin.phone}</td>
+                                    <td><button class="btn btn-primary btn-sm" onclick="editAdmin(${admin.id})">Edit</button></td>
+                                    <td><button class="btn btn-danger btn-sm" onclick="deleteAdmin(${admin.id})">Delete</button></td>
+                                </tr>
+                            `).join('');
+                            document.getElementById('main-content').innerHTML = `
+                                <h2>Admin Configurations</h2>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Email</th>
+                                            <th>Name</th>
+                                            <th>Phone</th>
+                                            <th colspan="2">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>${rows}</tbody>
+                                </table>
+                                <form id="admin-crud-form" class="mt-4">
+                                    <div class="mb-3">
+                                        <label for="admin-email" class="form-label">Email</label>
+                                        <input type="email" id="admin-email" class="form-control" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="admin-name" class="form-label">Name</label>
+                                        <input type="text" id="admin-name" class="form-control" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="admin-phone" class="form-label">Phone</label>
+                                        <input type="text" id="admin-phone" class="form-control" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Create Admin</button>
+                                </form>
+                            `;
+                            document.getElementById('admin-crud-form').addEventListener('submit', function(e) {
+                                e.preventDefault();
+                                const email = document.getElementById('admin-email').value;
+                                const name = document.getElementById('admin-name').value;
+                                const phone = document.getElementById('admin-phone').value;
+                                fetch('http://localhost:8081/admin/create', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ email, name, phone })
+                                })
+                                .then(response => response.json())
+                                .then(result => {
+                                    alert('Admin created successfully');
+                                    loadPage('admin-config');
+                                })
+                                .catch(error => showError('Failed to create admin.'));
+                            });
+                            window.editAdmin = function(id) {
+                                fetch(`http://localhost:8081/admin/${id}`)
+                                    .then(response => response.json())
+                                    .then(admin => {
+                                        document.getElementById('main-content').innerHTML = `
+                                            <h2>Edit Admin</h2>
+                                            <form id="edit-admin-form" class="row g-3">
+                                                <div class="col-md-3">
+                                                    <label for="edit-admin-id" class="form-label">Admin ID</label>
+                                                    <input type="text" id="edit-admin-id" class="form-control" value="${admin.id}" readonly>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="edit-admin-email" class="form-label">Email</label>
+                                                    <input type="email" id="edit-admin-email" class="form-control" value="${admin.email}" required>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="edit-admin-name" class="form-label">Name</label>
+                                                    <input type="text" id="edit-admin-name" class="form-control" value="${admin.name}" required>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="edit-admin-phone" class="form-label">Phone</label>
+                                                    <input type="text" id="edit-admin-phone" class="form-control" value="${admin.phone}" required>
+                                                </div>
+                                                <div class="col-12">
+                                                    <button type="submit" class="btn btn-primary">Update Admin</button>
+                                                </div>
+                                            </form>
+                                        `;
+                                        document.getElementById('edit-admin-form').addEventListener('submit', function(e) {
+                                            e.preventDefault();
+                                            const email = document.getElementById('edit-admin-email').value;
+                                            const name = document.getElementById('edit-admin-name').value;
+                                            const phone = document.getElementById('edit-admin-phone').value;
+                                            fetch(`http://localhost:8081/admin/update/${id}`, {
+                                                method: 'PUT',
+                                                headers: { 'Content-Type': 'application/json' },
+                                                body: JSON.stringify({ email, name, phone })
+                                            })
+                                            .then(response => response.json())
+                                            .then(result => {
+                                                alert('Admin updated successfully');
+                                                loadPage('admin-config');
+                                            })
+                                            .catch(error => showError('Failed to update admin.'));
+                                        });
+                                    })
+                                    .catch(error => showError('Failed to load admin.'));
+                            };
+                            window.deleteAdmin = function(id) {
+                                fetch(`http://localhost:8081/admin/delete/${id}`, { method: 'DELETE' })
+                                    .then(response => {
+                                        if (response.ok) alert('Admin deleted successfully');
+                                        else throw new Error('Failed to delete admin');
+                                    })
+                                    .catch(error => showError('Failed to delete admin.'));
+                            };
+                        })
+                        .catch(error => showError('Failed to load admins.'));
+                    break;
+                case 'user-crud':
+                    fetch('http://localhost:8081/user/all')
+                        .then(response => response.json())
+                        .then(data => {
+                            const rows = data.map(user => `
+                                <tr>
+                                    <td>${user.id}</td>
+                                    <td>${user.email}</td>
+                                    <td>${user.name}</td>
+                                    <td>${user.phone}</td>
+                                    <td><button class="btn btn-primary btn-sm" onclick="editUser(${user.id})">Edit</button></td>
+                                    <td><button class="btn btn-danger btn-sm" onclick="deleteUser(${user.id})">Delete</button></td>
+                                </tr>
+                            `).join('');
+                            document.getElementById('main-content').innerHTML = `
+                                <h2>Users</h2>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Email</th>
+                                            <th>Name</th>
+                                            <th>Phone</th>
+                                            <th colspan="2">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>${rows}</tbody>
+                                </table>
+                                <form id="user-crud-form" class="mt-4">
+                                    <div class="mb-3">
+                                        <label for="user-email" class="form-label">Email</label>
+                                        <input type="email" id="user-email" class="form-control" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="user-name" class="form-label">Name</label>
+                                        <input type="text" id="user-name" class="form-control" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="user-phone" class="form-label">Phone</label>
+                                        <input type="text" id="user-phone" class="form-control" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Create User</button>
+                                </form>
+                            `;
+                            document.getElementById('user-crud-form').addEventListener('submit', function(e) {
+                                e.preventDefault();
+                                const email = document.getElementById('user-email').value;
+                                const name = document.getElementById('user-name').value;
+                                const phone = document.getElementById('user-phone').value;
+                                fetch('http://localhost:8081/user/create', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ email, name, phone })
+                                })
+                                .then(response => response.json())
+                                .then(result => {
+                                    alert('User created successfully');
+                                    loadPage('user-crud');
+                                })
+                                .catch(error => showError('Failed to create user.'));
+                            });
+                            window.editUser = function(id) {
+                                fetch(`http://localhost:8081/user/${id}`)
+                                    .then(response => response.json())
+                                    .then(user => {
+                                        document.getElementById('main-content').innerHTML = `
+                                            <h2>Edit User</h2>
+                                            <form id="edit-user-form" class="row g-3">
+                                                <div class="col-md-3">
+                                                    <label for="edit-user-id" class="form-label">User ID</label>
+                                                    <input type="text" id="edit-user-id" class="form-control" value="${user.id}" readonly>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="edit-user-email" class="form-label">Email</label>
+                                                    <input type="email" id="edit-user-email" class="form-control" value="${user.email}" required>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="edit-user-name" class="form-label">Name</label>
+                                                    <input type="text" id="edit-user-name" class="form-control" value="${user.name}" required>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="edit-user-phone" class="form-label">Phone</label>
+                                                    <input type="text" id="edit-user-phone" class="form-control" value="${user.phone}" required>
+                                                </div>
+                                                <div class="col-12">
+                                                    <button type="submit" class="btn btn-primary">Update User</button>
+                                                </div>
+                                            </form>
+                                        `;
+                                        document.getElementById('edit-user-form').addEventListener('submit', function(e) {
+                                            e.preventDefault();
+                                            const email = document.getElementById('edit-user-email').value;
+                                            const name = document.getElementById('edit-user-name').value;
+                                            const phone = document.getElementById('edit-user-phone').value;
+                                            fetch(`http://localhost:8081/user/update/${id}`, {
+                                                method: 'PUT',
+                                                headers: { 'Content-Type': 'application/json' },
+                                                body: JSON.stringify({ email, name, phone })
+                                            })
+                                            .then(response => response.json())
+                                            .then(result => {
+                                                alert('User updated successfully');
+                                                loadPage('user-crud');
+                                            })
+                                            .catch(error => showError('Failed to update user.'));
+                                        });
+                                    })
+                                    .catch(error => showError('Failed to load user.'));
+                            };
+                            window.deleteUser = function(id) {
+                                fetch(`http://localhost:8081/user/delete/${id}`, { method: 'DELETE' })
+                                    .then(response => {
+                                        if (response.ok) alert('User deleted successfully');
+                                        else throw new Error('Failed to delete user');
+                                    })
+                                    .catch(error => showError('Failed to delete user.'));
+                            };
+                        })
+                        .catch(error => showError('Failed to load users.'));
+                    break;
+                case 'notifications':
+                    document.getElementById('main-content').innerHTML = `
+                        <h2>Notifications</h2>
+                        <form id="send-notification-form">
+                            <div class="mb-3">
+                                <label for="notification-title" class="form-label">Title</label>
+                                <input type="text" id="notification-title" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="notification-message" class="form-label">Message</label>
+                                <textarea id="notification-message" class="form-control" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Notification</button>
+                        </form>
+                    `;
+                    document.getElementById('send-notification-form').addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        const title = document.getElementById('notification-title').value;
+                        const message = document.getElementById('notification-message').value;
+                        fetch('http://localhost:8081/notifications/send', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ title, message })
+                        })
+                        .then(response => response.json())
+                        .then(result => {
+                            alert('Notification sent successfully');
+                        })
+                        .catch(error => showError('Failed to send notification.'));
+                    });
+                    break;
+                default:
+                    showError('Page not found.');
+                    break;
+            }
+        }
+
+        function logout() {
+            // Handle logout logic here
+            alert('Logged out');
+        }
+    </script>
 </head>
 <body>
     <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
@@ -58,5 +528,82 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+        <nav class="navbar navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 navbar-light bg-white border-bottom border-bottom-lg-0 border-end-lg" id="navbarVertical">
+            <div class="container-fluid">
+                <!-- Toggler -->
+                <button class="navbar-toggler ms-n2" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse" aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Brand -->
+                <a class="" href="#">
+                    <img src="img/Logox.png" alt="LOGO">
+                </a>
+                <!-- User menu (mobile) -->
+                <div class="navbar-user d-lg-none">
+                    <!-- Dropdown -->
+                    <div class="dropdown">
+                        <!-- Menu -->
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="sidebarAvatar">
+                            <a href="#" class="dropdown-item">Profile</a>
+                            <a href="#" class="dropdown-item">Settings</a>
+                            <a href="#" class="dropdown-item">Billing</a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">Logout</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Collapse -->
+                <div class="collapse navbar-collapse" id="sidebarCollapse">
+                    <!-- Navigation -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="loadPage('dashboard')">
+                                <i class="bi bi-house"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="loadPage('camps')">
+                                <i class="bi bi-bookmarks"></i> Camps
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="loadPage('admin-config')">
+                                <i class="bi bi-person-square"></i> Admin Configurations
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="loadPage('user-crud')">
+                                <i class="bi bi-people"></i> Users
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="loadPage('notifications')">
+                                <i class="bi bi-bell"></i> Notifications
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- Divider -->
+                    <hr class="navbar-divider my-5 opacity-20">
+                    <!-- Push content down -->
+                    <center>
+                        <div class="mt-auto">
+                            <button class="btn btn-primary w-100" onclick="logout()">Logout</button>
+                        </div>
+                    </center>
+                </div>
+            </div>
+        </nav>
+        <!-- Main content -->
+        <div id="main-content" class="h-screen flex-grow-1 overflow-y-lg-auto">
+            <!-- Welcome Page -->
+            <div id="welcome-page">
+                <h1>Welcome to the Admin Dashboard</h1>
+                <p id="current-time">Current Time: </p>
+                <p id="current-date">Date: </p>
+            </div>
+            <!-- Content will be loaded here -->
+        </div>
+    </div>
 </body>
 </html>
