@@ -69,9 +69,12 @@ campForm.onsubmit = function(event) {
     const campName = document.getElementById("campName").value;
     const campDate = document.getElementById("campDate").value;
     const campTime = document.getElementById("campTime").value;
-    const campLocation = campLocationInput.value; // Use the manually entered location
+    const campLocation = campLocationInput.value;
 
-    if (campName && campDate && campTime && campLocation) {
+    // Get contributorId from local storage
+    const contributorId = Number(localStorage.getItem("contributorId"));
+
+    if (campName && campDate && campTime && campLocation && contributorId) {
         // Send POST request to the backend
         fetch('http://localhost:8084/camp', {
             method: 'POST',
@@ -84,13 +87,12 @@ campForm.onsubmit = function(event) {
                 location: campLocation,
                 date: campDate,
                 time: campTime,
-                approved: false, // Default value
-                contributorId: null // Replace with actual contributor ID if available
+                approved: false,
+                contributorId: contributorId // Pass the contributorId
             })
         })
         .then(response => response.json())
         .then(data => {
-            // Check if the response is successful
             if (data) {
                 // Add camp to the table
                 addCampToTable(campName, campDate, campTime, campLocation);

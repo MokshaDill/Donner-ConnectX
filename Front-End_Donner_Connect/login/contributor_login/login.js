@@ -4,7 +4,6 @@ function loginUser(event) {
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
 
-    
     var url = 'http://localhost:8083/getUserIDByEmailAndPassword';
 
     var requestBody = {
@@ -23,8 +22,10 @@ function loginUser(event) {
     .then(data => {
         console.log("Received data:", data);
         if (parseInt(data) > 0) {
+            // Store contributorId in local storage
+            localStorage.setItem("contributorId", data);
             alert("Login successful! User ID: " + data);
-            window.location.href = "register.html";
+            window.location.href = "../../Camp/index.html"; // Redirect to camp creation page
         } else {
             alert("Invalid email or password");
         }
@@ -33,6 +34,7 @@ function loginUser(event) {
         console.error('Error:', error);
     });
 }
+
 
 
 function openForm() {
