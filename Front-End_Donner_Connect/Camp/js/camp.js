@@ -6,6 +6,28 @@ const campForm = document.getElementById("campForm");
 const campsTable = document.getElementById("campsTable");
 const campLocationInput = document.getElementById('campLocationInput'); // Input field for typing location
 
+// Fetch and display existing camps when the page loads
+window.onload = function() {
+    fetch('http://localhost:8084/camp/camps', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Loop through the data and add each camp to the table
+        data.forEach(camp => {
+            addCampToTable(camp.name, camp.date, camp.time, camp.location);
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching camps:', error);
+        alert("An error occurred while fetching the camps.");
+    });
+};
+
 // When the user clicks the "Add New Camp" button, open the modal
 addCampBtn.onclick = function() {
     modal.style.display = "block";
@@ -47,15 +69,45 @@ campForm.onsubmit = function(event) {
     const campName = document.getElementById("campName").value;
     const campDate = document.getElementById("campDate").value;
     const campTime = document.getElementById("campTime").value;
-    const campLocation = campLocationInput.value; // Use the manually entered location
+    const campLocation = campLocationInput.value;
 
-    if (campName && campDate && campTime && campLocation) {
-        // Add camp to the table
-        addCampToTable(campName, campDate, campTime, campLocation);
+    // Get contributorId from local storage
+    const contributorId = Number(localStorage.getItem("contributorId"));
 
-        // Clear the form
-        campForm.reset();
-        modal.style.display = "none";
+    if (campName && campDate && campTime && campLocation && contributorId) {
+        // Send POST request to the backend
+        fetch('http://localhost:8084/camp', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                name: campName,
+                location: campLocation,
+                date: campDate,
+                time: campTime,
+                approved: false,
+                contributorId: contributorId // Pass the contributorId
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data) {
+                // Add camp to the table
+                addCampToTable(campName, campDate, campTime, campLocation);
+                
+                // Clear the form
+                campForm.reset();
+                modal.style.display = "none";
+            } else {
+                alert("Failed to add camp.");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("An error occurred. Please try again.");
+        });
     } else {
         alert("Please fill in all fields.");
     }

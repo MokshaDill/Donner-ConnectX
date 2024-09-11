@@ -2,13 +2,16 @@ package com.springbootcrud.campmgtservice.controller;
 
 import com.springbootcrud.campmgtservice.entity.Camp;
 import com.springbootcrud.campmgtservice.service.CampService;
+import com.springbootcrud.contributorservice.entity.Contributor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/camp")
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 public class CampController {
 
     @Autowired
@@ -32,6 +35,12 @@ public class CampController {
     @GetMapping("/contributor/{contributorId}")
     public List<Camp> getCampsByContributor(@PathVariable Long contributorId) {
         return campService.getCampsByContributor(contributorId);
+    }
+
+    @GetMapping("/camps")
+    public ResponseEntity<List<Camp>> getAllCamps() {
+        List<Camp> camps = campService.getAllCamps();
+        return ResponseEntity.ok(camps);
     }
 
     @DeleteMapping("/{id}")

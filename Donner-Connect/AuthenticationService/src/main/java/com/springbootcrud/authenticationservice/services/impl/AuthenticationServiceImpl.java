@@ -1,33 +1,43 @@
 package com.springbootcrud.authenticationservice.services.impl;
 
-import com.springbootcrud.authenticationservice.model.AuthenticationResponse;
-import com.springbootcrud.authenticationservice.model.User;
+import com.springbootcrud.authenticationservice.entity.AuthenticationResponse;
+import com.springbootcrud.authenticationservice.entity.User;
 import com.springbootcrud.authenticationservice.repository.UserRepository;
+import com.springbootcrud.authenticationservice.services.AuthenticationService;
+import com.springbootcrud.authenticationservice.services.JwtService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
-public class AuthenticationService {
+public class AuthenticationServiceImpl implements AuthenticationService {
 
+    @Autowired
     private final UserRepository repository;
+    @Autowired
     private final PasswordEncoder encoder;
+    @Autowired
     private final JwtService jwtService;
+    @Autowired
     private final PasswordEncoder passwordEncoder;
+    @Autowired
     private final AuthenticationManager authenticationManager;
 
-
-    public AuthenticationService(UserRepository repository, PasswordEncoder encoder, JwtService jwtService, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager) {
-        this.repository = repository;
-        this.encoder = encoder;
-        this.jwtService = jwtService;
-        this.passwordEncoder = passwordEncoder;
-        this.authenticationManager = authenticationManager;
+    public AuthenticationServiceImpl(UserRepository repository, PasswordEncoder encoder, JwtService jwtService, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager) {
+    this.repository = repository;
+    this.encoder = encoder;
+    this.jwtService = jwtService;
+    this.passwordEncoder = passwordEncoder;
+    this.authenticationManager = authenticationManager;
     }
 
+    /**
+     * to register user
+     * @param request
+     * @return
+     */
     public AuthenticationResponse register(User request) {
         User user = new User();
 
@@ -42,9 +52,14 @@ public class AuthenticationService {
 
         String token = jwtService.generateToken(user);
 
-        return new AuthenticationResponse(token);
+        return new AuthenticationResponse(token,user.getId());
     }
 
+    /**
+     * to authenticate user
+     * @param request
+     * @return
+     */
     public AuthenticationResponse authenticate(User request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -55,6 +70,6 @@ public class AuthenticationService {
         User user =repository.findByUsername(request.getUsername()).orElseThrow();
         String token = jwtService.generateToken(user);
 
-        return new AuthenticationResponse(token);
+        return new AuthenticationResponse(token,user.getId());
     }
 }
