@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 @CrossOrigin
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -56,7 +57,7 @@ public class UserController {
      * Updates a User's information.
      * @param id The ID of the user to update.
      * @param user The user object containing updated information.
-     * @return The updated user object, or a 404 error if not found.
+     * @return The updated user object
      */
     @PutMapping("/update/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
@@ -69,7 +70,7 @@ public class UserController {
 
     /**
      *
-     * @param id
+     * @param id The ID of the user to delete
      * @return
      */
     @DeleteMapping("/delete/{id}")
@@ -77,6 +78,7 @@ public class UserController {
         // Call the service method to delete the user by ID
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
+
 
     }
 }

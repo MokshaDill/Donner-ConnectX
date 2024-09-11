@@ -14,6 +14,7 @@ public interface UserService {
      * @param user The user object to be registered.
      * @return The registered user object.
      */
+  
     User registerUser(User user);
 
     /**
@@ -47,4 +48,5 @@ public interface UserService {
      * @param userId The ID of the user to delete.
      */
     void deleteUser(Long userId);
+
 }

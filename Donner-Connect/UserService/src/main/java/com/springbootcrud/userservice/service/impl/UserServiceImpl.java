@@ -43,6 +43,7 @@ public class UserServiceImpl implements UserService {
         existingUser.setAddress(user.getAddress());
 
         return userRepository.save(existingUser);
+
     }
 
     /**
@@ -76,19 +77,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
+      
     }
 }
 
-    /**
-     *
-     * @param userId
-     * @return
-     */
-
-@Override
-    public List<String> getDonationHistory(Long userId) {
-        // Dummy implementation for demonstration
-        // In real-world use, this would fetch data from a repository or another service.
-        return List.of("Donation 1", "Donation 2", "Donation 3");
-    }
-}
+    

@@ -1,0 +1,110 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#welcome {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#welcome h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+#welcome p {
+    font-size: 18px;
+}
+
+.sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #ddd;
+}
+
+.navbar-brand img {
+    margin-right: 10px;
+}
+
+#datetime {
+    font-size: 16px;
+}
+
+.modal .modal-header {
+    background-color: #007bff;
+    color: #fff;
+}
+
+
+/* Color Theme */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --background-color: #f4f6f9;
+    --text-color: #333;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.navbar, .modal-header {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+}
+
+.sidebar .nav-link {
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.sidebar .nav-link:hover {
+    background-color: var(--secondary-color);
+    color: var(--light-color);
+}
+
+#welcome {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#welcome h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+#welcome p {
+    font-size: 18px;
+}
+
+/* Notification Box */
+.notification-box {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    display: none;
+    z-index: 1000;
+}
+
+.notification-box.error {
+    background-color: var(--danger-color);
+    color: var(--light-color);
+}
+
+.notification-box.success {
+    background-color: var(--success-color);
+    color: var(--light-color);
+}

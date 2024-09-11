@@ -19,7 +19,8 @@ public class Camp {
     private String location;
     private Date date;
     private Time time;
-    private boolean approved;
+
+    private boolean approved = false;
 
     private Long contributorId;
 

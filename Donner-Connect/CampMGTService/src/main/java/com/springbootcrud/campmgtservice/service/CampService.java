@@ -11,4 +11,6 @@ public interface CampService {
     List<Camp> getCampsByContributor(Long contributorId);
     void deleteCamp(Long id);
     List<Camp> getAllPendingApprovalCamps();
+
+    List<Camp> getAllCamps();
 }

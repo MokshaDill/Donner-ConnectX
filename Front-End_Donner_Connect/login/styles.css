@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 300px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.tab {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.tab button {
+    background-color: #eee;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    width: 33%;
+    text-align: center;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.tab button.active {
+    background-color: #f44336;
+    color: white;
+}
+
+.tabcontent {
+    display: none;
+    padding: 20px;
+}
+
+.tabcontent h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+input[type="text"],
+input[type="username"],
+input[type="role"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #d32f2f;
+}
+
+.register-link,
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.register-link a,
+.login-link a {
+    color: #f44336;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link a:hover,
+.login-link a:hover {
+    text-decoration: underline;
+}

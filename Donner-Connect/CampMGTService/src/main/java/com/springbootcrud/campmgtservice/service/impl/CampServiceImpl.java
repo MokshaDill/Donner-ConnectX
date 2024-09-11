@@ -26,7 +26,7 @@ public class CampServiceImpl implements CampService {
         String contributorUrl = "http://localhost:8085/contributor/{id}";
         Contributor contributor = restTemplate.getForObject(contributorUrl, Contributor.class, camp.getContributorId());
 
-        // You can now use the contributor details in your logic
+        // now use the contributor details in your logic
         if (contributor != null) {
             // Proceed with creating the camp
             return campRepository.save(camp);
@@ -66,5 +66,10 @@ public class CampServiceImpl implements CampService {
     @Override
     public List<Camp> getAllPendingApprovalCamps() {
         return campRepository.findByApprovedFalse();
+    }
+
+    @Override
+    public List<Camp> getAllCamps() {
+        return campRepository.findAll();
     }
 }
