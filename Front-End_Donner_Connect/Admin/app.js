@@ -52,11 +52,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function loadContent(page) {
-        mainContent.innerHTML = '<p>Loading..ccc.</p>';
+        mainContent.innerHTML = '<p>Loading...</p>';
         switch (page) {
             case 'dashboard':
-                mainContent.innerHTML = '<h2>Dashboard</h2><p>Loading dashboard data...</p>';
-                // Implement AJAX request for dashboard data
+                dashboard();
                 break;
 
             case 'admins':
@@ -64,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 break;
 
             case 'camps':
-                loadCamps();
+                loadContent();
                 break;
 
             case 'user-crud':
@@ -72,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 break;
 
             case 'send-notification':
-                mainContent.innerHTML = '<h2>Send Notification</h2><p>Send notification functionality not implemented.</p>';
+                
                 break;
 
             default:
@@ -728,7 +727,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function dashboard(page) {
         const mainContent = document.getElementById('main-content');
-        mainContent.innerHTML = '<p>Loading...</p>';
+        mainContent.innerHTML = '<p>Loading.fffff..</p>';
     
         if (page === 'dashboard') {
             Promise.all([
