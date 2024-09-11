@@ -9,31 +9,28 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
     private String name;
-
     private String email;
-
     private String phoneNumber;
+    private String address;  // Field for address
 
-    @ElementCollection
-    private List<String> donations;
 
-    // Default constructor
-    public User() {
-    }
+    //Default constructor
+    public User() {}
 
-    // Parameterized constructor
-    public User(Long id, String name, String email, String phoneNumber, List<String> donations) {
+    // All-args constructor
+    public User(Long id, String name, String email, String phoneNumber, String address) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.donations = donations;
+        this.address = address;
     }
 
-    // Getters and Setters
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -66,11 +63,11 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public List<String> getDonations() {
-        return donations;
+    public String getAddress() {
+        return address;
     }
 
-    public void setDonations(List<String> donations) {
-        this.donations = donations;
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
