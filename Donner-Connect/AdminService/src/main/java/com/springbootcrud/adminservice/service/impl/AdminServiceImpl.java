@@ -69,7 +69,10 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public void deleteAdmin(Long id) {
-        // Delete the admin entity by ID
-        adminRepository.deleteById(id);
+        if (adminRepository.existsById(id)) {
+            adminRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Admin not found");
+        }
     }
 }
