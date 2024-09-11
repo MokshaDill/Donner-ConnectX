@@ -22,37 +22,31 @@ function openRole(evt, roleName) {
     }
 }
 
-document.getElementById("User").style.display = "block"; // Default tab open
+//document.getElementById("User").style.display = "block"; // Default tab open
 
-function handleLogin(event, role) {
+function handleLogin(event) {
     event.preventDefault();
-    //const form = event.target;
 
-    var uname = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
+    const uname = document.getElementById("usernameUser").value;
+    const password = document.getElementById("passwordUser").value;
 
-    var requestBody = {
-        email: uname,
-        password: password,
-        role: role
-    };
 
-    // const uname = form.querySelector('input[type="username"]').value;
-    // const password = form.querySelector('input[type="password"]').value;
-
-    var url = 'http://localhost:8083/login';
-
-    fetch(url, {
+    fetch('http://localhost:8083/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(requestBody)
+        body: JSON.stringify({
+            "username" : uname,
+            "password" : password
+            //"role": "USER"
+        }),
     })
     .then(response => response.json())
     .then(data => {
-        alert('Login successful'); 
-        window.location.href = "register.html";
+        alert('Login successful userId= '+data.userId); 
+        window.location.href = `../header & footer/home.html`;
+        // localStorage.setItem('userId', userId);
         console.log(data); 
     })
     .catch(error => console.error('Error:', error));
@@ -63,8 +57,7 @@ function handleSignup(event) {
     print("SignUp");
     event.preventDefault();
     const form = event.target;
-    const fname = form.querySelector('input[type="text"]').value;
-    const lname = form.querySelector('input[type="text"]').value;
+    const email = form.querySelector('input[type="text"]').value;
     const uname = form.querySelector('input[type="username"]').value;
     const password = form.querySelector('input[type="password"]').value;
 
@@ -74,11 +67,10 @@ function handleSignup(event) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            "firstName" : fname,
-            "lastName" : lname,
+            "email" : email,
             "username" : uname,
             "password" : password,
-            "role" : "ADMIN"
+            "role" : "USER"
         }),
     })
     .then(response => response.json())
@@ -88,3 +80,12 @@ function handleSignup(event) {
     })
     .catch(error => console.error('Error:', error));
 }
+
+// Retrieve the userId from localStorage (or sessionStorage)
+// const userId = localStorage.getItem('userId');
+
+// if (userId) {
+//     console.log("User ID from localStorage:", userId);
+//     // Use the userId for further logic
+// }
+
