@@ -24,7 +24,9 @@ function loginUser(event) {
         if (parseInt(data) > 0) {
             // Store contributorId in local storage
             localStorage.setItem("contributorId", data);
-            alert("Login successful! User ID: " + data);
+
+            //alert("Login successful! User ID: " + data);
+            //alert("Login successful! User ID: " + data);
             window.location.href = "../../Camp/index.html"; // Redirect to camp creation page
         } else {
             alert("Invalid email or password");
