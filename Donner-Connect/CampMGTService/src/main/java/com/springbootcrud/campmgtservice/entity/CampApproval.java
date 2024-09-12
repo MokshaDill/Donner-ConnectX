@@ -1,6 +1,5 @@
 package com.springbootcrud.campmgtservice.entity;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,7 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
-public class Camp {
+public class CampApproval {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,16 +18,15 @@ public class Camp {
     private String location;
     private LocalDate date;
     private LocalTime time;
-
-    private boolean approved = false;
-
+    private boolean approved;
     private Long contributorId;
 
-    public Camp() {
+    // Constructors, getters, and setters
 
+    public CampApproval() {
     }
 
-    public Camp(String name, String location, LocalDate date, LocalTime time, boolean approved, Long contributorId) {
+    public CampApproval(String name, String location, LocalDate date, LocalTime time, boolean approved, Long contributorId) {
         this.name = name;
         this.location = location;
         this.date = date;
@@ -93,3 +91,4 @@ public class Camp {
         this.contributorId = contributorId;
     }
 }
+
