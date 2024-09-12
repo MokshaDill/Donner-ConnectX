@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Feedback List</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/footer.css" rel="stylesheet"/>                          <!--footer CSS link-->
+    <link href="/css/contactus.css" rel="stylesheet"/>                         <!--contactus CSS link-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">             <!--Google fonts link-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+
+    <script src="/js/bootstrap.bundle.js"></script>
+
+</head>
+
+<body>
+
+<div class="container-fluid top_container">Notice: In need of all blood types
+    <a href="#" style="text-decoration: none; color: white;"> Click here</a>
+</div>
+
+<!--nav bar-->
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container-fluid">
+
+        <!--logo-->
+        <a class="navbar-brand" href="#">
+            <img src="/img/logo.png" alt="Logo" style="width:35px; margin-left: 20px;" class="rounded-pill">
+            <b>Donor</b>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item" style="margin-right: 20px;">
+                    <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+                </li>
+                <li class="nav-item" style="margin-right: 20px;">
+                    <a class="nav-link active" aria-current="page" href="#">Camp</a>
+                </li>
+                <li class="nav-item" style="margin-right: 20px;">
+                    <a class="nav-link active" href="#">Gallery</a>
+                </li>
+                <li class="nav-item copyright" style="margin-right: 20px;">
+                    <a class="nav-link active"  href="aboutus.html">About us</a>
+                </li>
+                <li class="nav-item" style="margin-right: 20px;">
+                    <a class="nav-link active" href="contactus.html">Contact us</a>
+                </li>
+                <li class="nav-item" style="margin-right: 30px;">
+                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+
+                        <div class="btn-group" role="group">
+
+
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                DONATE BLOOD
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Doner</a></li>
+                                <li><a class="dropdown-item" href="#">Contributor</a></li>
+                                <li><a class="dropdown-item" href="#">Admin</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>  <!--navbar end-->
+
+<!--Carousal contact-->
+<div class="container-fluid" style="height: 15px; background-color: rgb(9, 3, 96);"></div>
+
+<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+
+        <div class="carousel-item active" data-bs-interval="10000" >
+            <img src="/img/world-blood-donor-day-creative-collage (1).jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <p>Enjoy your Feedbacks</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" style="height: 5px; background-color: rgb(9, 3, 96);"></div>
+
+<!--Carousal contact end-->
+
+<div class="card" style="border: none;">
+    <div class="feedback-section">
+
+        <div class="feedback-card" style="border: none;">
+            <div class="container-fluid cn_form">
+                <br>
+          <h1>Feedback List</h1>
+                <br>
+
+<table class="table w-100">
+    <thead>
+    <tr>
+       <!-- <th scope="col">Image</th> -->
+        <th class="fw-bold p-3 fs-5" scope="col">Name</th>
+        <th class="fw-bold p-3 fs-5" scope="col">Feedback</th>
+        <th class="fw-bold p-3 fs-5" scope="col">Actions</th>
+=======
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+
+<h1 class="text-center my-5">Feedback List</h1>
+<div class="container p-2">
+
+<a class="btn btn-primary" th:href="@{/feedback/new}">Add New Feedback</a>
+<table>
+    <thead>
+    <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Feedback</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="feedback : ${feedbackList}">
+       <!-- <td><img th:src="@{${feedback.userImageUrl}}" alt="User Image" width="50px" height="50px"></td> -->
+        <td class="fs-5 p-3" th:text="${feedback.userName}"></td>
+        <td class="fs-5 p-3" th:text="${feedback.feedbackText}"></td>
+        <td class="p-3">
+        <td><img th:src="@{${feedback.userImageUrl}}" alt="User Image" width="100" height="100"></td>
+        <td th:text="${feedback.userName}"></td>
+        <td th:text="${feedback.feedbackText}"></td>
+        <td>
+            <a class="btn btn-primary" th:href="@{/feedback/edit/{id}(id=${feedback.id})}">Edit</a>
+            <a class="btn btn-primary" th:href="@{/feedback/delete/{id}(id=${feedback.id})}"
+               onclick="return confirm('Are you sure you want to delete this feedback?');">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+                <a class="btn btn-primary" th:href="@{/feedback/new}">Add New Feedback</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" style="height: 30px;"></div>
+
+<!--footer-->
+
+<div class="footer-clean">
+    <footer>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-sm-4 col-md-3 item">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>Address: No'20 / Homagama, pitipana. </li>
+                        <li>Telephone no: 0736990230</li><br>
+                        <li><a href="https://mail.google.com/">Email: donorclinic1234@gmail.com</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4 col-md-3 item">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="#">Company</a></li>
+                        <li><a href="#">Team</a></li>
+                        <li><a href="#">Legacy</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4 col-md-3 item">
+                    <h3>The Donor site</h3>
+                    <ul>
+                        <li> Our patients tell us that the calibre of their interactions, our focus on the little things, and the effectiveness of their visits result in healthcare unlike anything they've ever received.
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="col-lg-3 item social">
+                    <h3>Social Media</h3>
+                    <a href="https://www.facebook.com/"><i class="icon ion-social-facebook"></i></a>
+                    <a href="https://twitter.com/"><i class="icon ion-social-twitter"></i></a>
+                    <a href="#"><i class="icon ion-social-snapchat"></i></a>
+                    <a href="https://www.instagram.com/"><i class="icon ion-social-instagram"></i></a>
+                    <p class="copyright">Copyright © 2023 All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+<hr>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</body>
+</html>
+
+

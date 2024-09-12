@@ -15,14 +15,15 @@ public class User {
     private String name;
     private String email;
     private String phoneNumber;
-    private String address;  // Field for address
+    private String address;  
 
 
     //Default constructor
     public User() {}
 
-    // All-args constructor
+    // All args constructor
     public User(Long id, String name, String email, String phoneNumber, String address) {
+
         this.id = id;
         this.name = name;
         this.email = email;
@@ -30,7 +31,9 @@ public class User {
         this.address = address;
     }
 
-    // Getters and setters
+
+    // Getters and Setters
+  
     public Long getId() {
         return id;
     }
