@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+    //JpaRepository provides CRUD methods including save, findAll, findById, deleteById, etc.
 }
