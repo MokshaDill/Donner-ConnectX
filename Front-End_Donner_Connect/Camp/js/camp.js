@@ -251,3 +251,5 @@ function deleteCamp(campId) {
         });
     }
 }
+
+
