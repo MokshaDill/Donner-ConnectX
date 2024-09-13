@@ -1,0 +1,188 @@
+
+/* The popup form - hidden by default */
+/* Style for the open button */
+.open-button {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    /* position: fixed; */
+    bottom: 23px;
+    right: 28px;
+    width: 120px;
+    border-radius: 2px;
+  }
+  
+  /* The popup form - hidden by default */
+  .form-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+    width: 400px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    padding: 30px;
+  }
+  
+  /* Style the form container */
+  .form-container {
+    max-width: 100%;
+    padding: 20px;
+  }
+  
+  /* Full-width input fields */
+  .form-container input[type=email], .form-container input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+    border-radius: 5px;
+  }
+  
+  /* Style the submit/login button */
+  .form-container .btn {
+    background-color: #f44336;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
+  
+  .form-container .btn:hover {
+    opacity: 1;
+  }
+  
+  /* Style the cancel button */
+  .form-container .cancel {
+    background-color: #ccc;
+    color: black;
+  }
+  
+  /* Media query for responsiveness */
+  @media (max-width: 600px) {
+    .form-popup {
+        width: 100%;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        transform: none;
+    }
+  }
+  
+  /* Full-width input fields */
+.form-container input[type=email], 
+.form-container input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0 20px 0; /* Increased margin for better spacing */
+    border: none;
+    background: #f1f1f1;
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensures padding is considered in width */
+  }
+  
+/*
+ body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+*/
+.container {
+    width: 300px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+} 
+
+.tab {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.tab button {
+    background-color: #eee;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    width: 33%;
+    text-align: center;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+.tab button.active {
+    background-color: #f44336;
+    color: white;
+}
+
+.tabcontent {
+    display: none;
+    padding: 20px;
+}
+.tabcontent h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+input[type="text"],
+input[type="username"],
+input[type="role"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #d32f2f;
+}
+
+.register-link,
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.register-link a,
+.login-link a {
+    color: #f44336;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link a:hover,
+.login-link a:hover {
+    text-decoration: underline;
+} 
+
