@@ -11,6 +11,3 @@ public class NotificationServiceApplication {
     }
 
 }
-
-
-// change name toô messageX
