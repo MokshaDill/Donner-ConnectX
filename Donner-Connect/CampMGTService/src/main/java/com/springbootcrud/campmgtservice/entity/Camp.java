@@ -6,8 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 public class Camp {
@@ -17,8 +17,8 @@ public class Camp {
     private Long id;
     private String name;
     private String location;
-    private Date date;
-    private Time time;
+    private LocalDate date;
+    private LocalTime time;
 
     private boolean approved = false;
 
@@ -28,7 +28,7 @@ public class Camp {
 
     }
 
-    public Camp(String name, String location, Date date, Time time, boolean approved, Long contributorId) {
+    public Camp(String name, String location, LocalDate date, LocalTime time, boolean approved, Long contributorId) {
         this.name = name;
         this.location = location;
         this.date = date;
@@ -61,19 +61,19 @@ public class Camp {
         this.location = location;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public Time getTime() {
+    public LocalTime getTime() {
         return time;
     }
 
-    public void setTime(Time time) {
+    public void setTime(LocalTime time) {
         this.time = time;
     }
 
