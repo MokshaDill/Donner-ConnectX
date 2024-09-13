@@ -25,6 +25,14 @@ public class CampServiceImpl implements CampService {
     @Autowired
     private RestTemplate restTemplate;  // Inject RestTemplate
 
+    /**
+     * Creates a new blood camp and synchronizes it with CampApproval.
+     *
+     * @param camp The Camp object containing details of the blood camp to be created.
+     * @return The created Camp object.
+     * @throws RuntimeException if the contributor is not found.
+     */
+
     @Override
     public Camp createCamp(Camp camp) {
         // Fetch contributor details from ContributorService

@@ -23,6 +23,18 @@ public class Contributor {
 
     }
 
+    /**
+     * Constructs a Contributor with the specified details.
+     *
+     * @param name        The name of the contributor.
+     * @param email       The email of the contributor.
+     * @param nic         The NIC of the contributor.
+     * @param address     The address of the contributor.
+     * @param city        The city of the contributor.
+     * @param phoneNumber The phone number of the contributor.
+     * @param password    The password of the contributor.
+     */
+
     public Contributor(String name, String email, String nic, String address, String city, String phoneNumber, String password) {
         super();
         this.name = name;

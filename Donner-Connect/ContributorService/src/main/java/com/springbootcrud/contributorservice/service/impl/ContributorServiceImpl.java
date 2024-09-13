@@ -15,6 +15,13 @@ public class ContributorServiceImpl implements ContributorService {
     @Autowired
     private ContributorRepository contributorRepository;
 
+    /**
+     * Registers a new contributor by saving it to the repository.
+     *
+     * @param contributor The contributor to be registered.
+     * @return The saved contributor.
+     */
+
     @Override
     public Contributor registerContributor(Contributor contributor) {
         return contributorRepository.save(contributor);

@@ -11,6 +11,8 @@ function loginUser(event) {
         password: password
     };
 
+    console.log("Received data:", requestBody);
+
     fetch(url, {
         method: 'POST',
         headers: {
@@ -21,12 +23,13 @@ function loginUser(event) {
     .then(response => response.text())
     .then(data => {
         console.log("Received data:", data);
+        console.log("Received data:", email);
         if (parseInt(data) > 0) {
             // Store contributorId in local storage
             localStorage.setItem("contributorId", data);
 
             //alert("Login successful! User ID: " + data);
-            //alert("Login successful! User ID: " + data);
+            alert("Login successful! User ID: " + data);
             window.location.href = "../../Camp/index.html"; // Redirect to camp creation page
         } else {
             alert("Invalid email or password");

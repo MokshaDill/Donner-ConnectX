@@ -120,3 +120,29 @@ input, .submit-btn {
 .submit-btn:hover {
     background-color: #a60000;
 }
+
+.edit-btn, .delete-btn {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background-color: #74b9ff;
+    color: white;
+    border-radius: 3px;
+}
+
+.delete-btn {
+    background-color: #ff6b6b;
+    color: white;
+    border-radius: 3px;
+}
+
+.edit-btn:hover {
+    background-color: #0984e3;
+}
+
+.delete-btn:hover {
+    background-color: #ff7675;
+}

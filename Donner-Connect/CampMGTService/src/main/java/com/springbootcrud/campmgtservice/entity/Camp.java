@@ -9,6 +9,11 @@ import jakarta.persistence.Id;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * Entity class representing a blood camp.
+ * This class is mapped to the "camp" table in the database.
+ */
+
 @Entity
 public class Camp {
 
@@ -27,6 +32,17 @@ public class Camp {
     public Camp() {
 
     }
+
+    /**
+     * Parameterized constructor for creating a Camp object.
+     *
+     * @param name The name of the blood camp.
+     * @param location The location of the blood camp.
+     * @param date The date of the blood camp.
+     * @param time The time of the blood camp.
+     * @param approved The approval status of the blood camp.
+     * @param contributorId The ID of the contributor who created the blood camp.
+     */
 
     public Camp(String name, String location, LocalDate date, LocalTime time, boolean approved, Long contributorId) {
         this.name = name;

@@ -6,13 +6,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="css/bootstrap.min.css" rel="stylesheet"/>
         <link href="css/footer.css" rel="stylesheet"/>                          <!--CSS link-->
-        <link href="css/contributor.css" rel="stylesheet"/> 
+        <link href="css/contributor.css" rel="stylesheet"/>
+        <link href="../login/contributor_login/login.css" rel="stylesheet"/> 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">             <!--Google fonts link-->
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
 
         <script src="js/bootstrap.bundle.js"></script>
+        <script src="../login/contributor_login/login.js"></script>
     </head>
 
     <body>
@@ -38,7 +40,7 @@
                         <a class="nav-link active" aria-current="page" href="home.html">Home</a>
                       </li>
                       <li class="nav-item" style="margin-right: 20px;">
-                        <a class="nav-link active" aria-current="page" href="host_drive.html">Camp</a>
+                        <a class="nav-link active" aria-current="page" href="../login/contributor_login/index.html">Camp</a>
                       </li>
                       <li class="nav-item" style="margin-right: 20px;">
                         <a class="nav-link active" href="gallery.html">Gallery</a>
@@ -106,6 +108,10 @@
                                     <td>New York</td>
                                     <td>+123456789</td>
                                     <td>********</td>
+                                    <td>
+                                        <button class="edit-btn">Edit</button>
+                                        <button class="delete-btn">Delete</button>
+                                  </td>
                                 </tr>
                                 <!-- Additional contributors can go here -->
                             </tbody>
@@ -133,7 +139,23 @@
                 
 
              </div>
-
+             <!-- Login Form Popup -->
+             <!-- <div class="form-popup" id="loginForm">
+              <form class="form-container">
+                  <h2>Login</h2>
+      
+                  <label for="email"><b>Email</b></label>
+                  <input type="email" id="email" placeholder="Enter Email" required>
+      
+                  <label for="psw"><b>Password</b></label>
+                  <input type="password" id="password" placeholder="Enter Password" required>
+      
+      
+                  <button type="submit" class="btn" onclick="loginUser(event)">Login</button>
+                  <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+              </form>
+            </div> -->
+  </div>
 
              <br><br><br><br><br><br><br><br><br><br>
           
