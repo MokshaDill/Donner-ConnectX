@@ -6,6 +6,7 @@
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/Auth/js/login.js"></script>
 
 </head>
 <body>
@@ -31,7 +32,7 @@
                             <a href="#" class="dropdown-item">Settings</a>
                             <a href="#" class="dropdown-item">Billing</a>
                             <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item" id="logout-link">Logout</a>
+                            <a href="#" class="dropdown-item" id="logout-link" onclick="handleLogout()">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -71,6 +72,16 @@
                     <center>
                         <div class="mt-auto">
                             <button class="btn btn-primary w-100" id="logout-link">Logout</button>
+                            <script>
+                                document.getElementById("logout-link").addEventListener("click", handleLogout);
+
+                                function handleLogout() {
+                                    // Add your logout logic here
+                                    // For example, redirect to the login page or clear session storage
+                                    // You can use window.location.href = "login.html"; to redirect to the login page
+                                    // Or use sessionStorage.clear(); to clear session storage
+                                }
+                            </script>
                         </div>
                     </center>
                 </div>
