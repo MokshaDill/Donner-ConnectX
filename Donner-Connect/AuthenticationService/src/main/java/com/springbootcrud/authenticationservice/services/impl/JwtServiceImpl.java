@@ -15,7 +15,7 @@ import java.util.function.Function;
 
 @Service
 public class JwtServiceImpl implements JwtService {
-        private final String SECRET_KEY = "f3fb129017f66e529886c76bce9878681f9621d89bff44004d11e2e0ba6af14f";
+    private final String SECRET_KEY = "f3fb129017f66e529886c76bce9878681f9621d89bff44004d11e2e0ba6af14f";
 
     /**
      *
@@ -74,11 +74,11 @@ public class JwtServiceImpl implements JwtService {
      */
     public Claims extractClaims(String token) {
         return  Jwts
-                .parser()
-                .verifyWith(getSigningKey())
-                .build()
-                .parseSignedClaims(token)
-                .getPayload();
+            .parser()
+            .verifyWith(getSigningKey())
+            .build()
+            .parseSignedClaims(token)
+            .getPayload();
     }
 
     /**
@@ -88,12 +88,12 @@ public class JwtServiceImpl implements JwtService {
      */
     public String generateToken(User user) {
         String token = Jwts
-                .builder()
-                .subject(user.getUsername())
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis()+ 24*60*60*1000 ))
-                .signWith(getSigningKey())
-                .compact();
+            .builder()
+            .subject(user.getUsername())
+            .issuedAt(new Date(System.currentTimeMillis()))
+            .expiration(new Date(System.currentTimeMillis()+ 24*60*60*1000 ))
+            .signWith(getSigningKey())
+            .compact();
 
         return token;
     }

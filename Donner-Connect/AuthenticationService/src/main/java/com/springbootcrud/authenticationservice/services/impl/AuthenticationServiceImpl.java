@@ -26,11 +26,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationServiceImpl(UserRepository repository, PasswordEncoder encoder, JwtService jwtService, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager) {
-    this.repository = repository;
-    this.encoder = encoder;
-    this.jwtService = jwtService;
-    this.passwordEncoder = passwordEncoder;
-    this.authenticationManager = authenticationManager;
+        this.repository = repository;
+        this.encoder = encoder;
+        this.jwtService = jwtService;
+        this.passwordEncoder = passwordEncoder;
+        this.authenticationManager = authenticationManager;
     }
 
     /**
@@ -41,8 +41,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public AuthenticationResponse register(User request) {
         User user = new User();
 
-        user.setFirstName(request.getFirstName());
-        user.setLastName(request.getLastName());
+        user.setEmail(request.getEmail());
         user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
@@ -62,10 +61,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
      */
     public AuthenticationResponse authenticate(User request) {
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getUsername(),
-                        request.getPassword()
-                )
+            new UsernamePasswordAuthenticationToken(
+                request.getUsername(),
+                request.getPassword()
+            )
         );
         User user =repository.findByUsername(request.getUsername()).orElseThrow();
         String token = jwtService.generateToken(user);
