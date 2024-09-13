@@ -43,7 +43,6 @@ public class UserServiceImpl implements UserService {
         existingUser.setAddress(user.getAddress());
 
         return userRepository.save(existingUser);
-
     }
 
     /**
@@ -81,4 +80,3 @@ public class UserServiceImpl implements UserService {
     }
 }
 
-    
